@@ -1,0 +1,216 @@
+GerenciarTelas:
+    TelaInicial:
+        name: 'tela1'
+    TelaCliente:
+        name: 'tela2'
+    TelaFuncionario:
+        name: 'tela3'
+    TelaCadastroCliente:
+        name: 'tela4'
+    TelaCadastroConfirmado:
+        name: 'tela5'
+
+<TelaInicial>
+    orientatio: 'vertical'
+    padding: 20
+
+    GridLayout:
+        cols: 1
+
+        Label:
+            text: 'Fábrica de sacolas'
+            haling: 'center'
+            font_size: 50
+
+        BoxLayout:
+            spacing: 30
+            padding: 30
+
+            Button:
+                id: botaoCliente
+                text: 'Sou cliente'
+                size_hint: (.5, .5)
+                pos_hint: {'x': .4, 'y': .4}
+                on_release: app.root.current = 'tela2'
+                background_color: (1, 1, 1, 1)
+
+            Button:
+                id: botaoFuncionario
+                text: 'Sou funcionário'
+                size_hint: (.5, .5)
+                pos_hint: {'x': .4, 'y': .4}
+                on_release: app.root.current = 'tela3'
+                background_color: (1, 1, 1, 1)
+
+<TelaCliente>
+    orientatio: 'vertical'
+    padding: 30
+
+    Label:
+        text: 'Fábrica de sacolas'
+        haling: 'center'
+        font_size: 30
+        pos_hint: {'x': .0, 'y': .4}
+    
+    Label:
+        text: 'Digite seu gmail:'
+        font_size: 22
+        pos_hint: {'center_x': .3, 'center_y': .7}
+
+
+    TextInput:
+        id: gmailCliente
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .7}
+
+    Label:
+        text: 'Digite sua senha:'
+        haling: 'left'
+        font_size: 22
+        pos_hint: {'center_x': .3, 'center_y': .5}
+
+    TextInput:
+        id: senhaCliente
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .5}
+
+    Button:
+        id: botaoEntrarCliente
+        text: 'Entrar'
+        size_hint: (.3, .1)
+        pos_hint: {'center_x': .5, 'center_y': .3}
+        on_release: root.entrar()
+        background_color: (1, 1, 1, 1)
+
+    Button:
+        id: botaoCadastrarCliente
+        text: 'Cadastra-se'
+        size_hint: (.2, .1)
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_release: app.root.current = 'tela4'
+        background_color: (1, 1, 1, 1)
+                
+
+
+
+<TelaFuncionario>
+    orientatio: 'vertical'
+    padding: 30
+
+    Label:
+        text: 'Fábrica de sacolas'
+        haling: 'center'
+        font_size: 30
+        pos_hint: {'x': .0, 'y': .4}
+    
+    Label:
+        text: 'Digite sua matrícula:'
+        font_size: 22
+        pos_hint: {'center_x': .3, 'center_y': .7}
+
+
+    TextInput:
+        id: matriculaFuncionario
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .7}
+
+    Label:
+        text: 'Digite sua senha:'
+        haling: 'left'
+        font_size: 22
+        pos_hint: {'center_x': .3, 'center_y': .5}
+
+    TextInput:
+        id: senhaFuncionario
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .5}
+
+    Button:
+        id: botaoEntrarFuncionario
+        text: 'Entrar'
+        size_hint: (.3, .1)
+        pos_hint: {'center_x': .5, 'center_y': .3}
+        on_release: root.entrar()
+        background_color: (1, 1, 1, 1)
+
+<TelaCadastroCliente>
+    orientatio: 'vertical'
+    padding: 30
+
+    Label:
+        text: 'Fábrica de sacolas'
+        haling: 'center'
+        font_size: 30
+        pos_hint: {'x': .0, 'y': .4}
+    
+    Label:
+        text: 'Digite seu nome completo:'
+        font_size: 22
+        pos_hint: {'center_x': .2, 'center_y': .7}
+
+
+    TextInput:
+        id: nomeCliente
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .7}
+
+    Label:
+        text: 'Digite seu cpf:'
+        font_size: 22
+        pos_hint: {'center_x': .2, 'center_y': .6}
+
+    TextInput:
+        id: cpfCliente
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .6}
+        input_filter: 'int'
+
+    Label:
+        text: 'Digite seu gmail:'
+        font_size: 22
+        pos_hint: {'center_x': .2, 'center_y': .5}
+
+    TextInput:
+        id: gmailCliente
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .5}
+
+    Label:
+        text: 'Digite sua senha:'
+        font_size: 22
+        pos_hint: {'center_x': .2, 'center_y': .4}
+
+    TextInput:
+        id: senhaCliente
+        size_hint: (.4, .1)
+        pos_hint: {'center_x': .6, 'center_y': .4}
+
+    Button:
+        id: 'botaoConfirmarCadastro'
+        text: 'Confirmar cadastro'
+        size_hint: (.3, .1)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+        on_release: root.confirmar()
+        on_release: app.root.current = 'tela5'
+
+<TelaCadastroConfirmado>
+    
+    Label:
+        text: 'Fábrica de sacolas'
+        haling: 'center'
+        font_size: 30
+        pos_hint: {'x': .0, 'y': .4}
+
+    Label:
+        text: 'Cadastro realizado com sucesso'
+        haling: 'center'
+        font_size: 25
+        pos_hint: {'center_x': .5, 'center_y': .5}
+
+    Button:
+        id: botaoFazerLoginFuncionario
+        text: 'Fazer login'
+        size_hint: (.3, .1)
+        pos_hint: {'center_x': .5, 'center_y': .3}
+        on_release: app.root.current = 'tela2'
+        background_color: (1, 1, 1, 1)
