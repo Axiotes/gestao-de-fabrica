@@ -1,55 +1,43 @@
-from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.lang import Builder
-from kivy.core.window import Window
-from kivy.uix.screenmanager import ScreenManager, Screen
-import conexaoBD
-
-database = conexaoBD.BancoDedados()
-database.conectar()
-
-Window.clearcolor = (30/100, 52/100, 86/100, 1)
-
-class GerenciarTelas(ScreenManager):
-    pass
-
-class TelaInicial(Screen):
-    pass
-
-class TelaCliente(Screen):
-    def entrar(self):
-        #gmail = self.ids.gmailCliente.text
-        #senha = self.ids.senhaCliente.text
-
-        print('Teste entrar')
-            
+from fastapi import FastAPI, Form
+from fastapi.middleware.cors import CORSMiddleware
+import mysql.connector
 
 
+app = FastAPI()
 
+origins = [
+    "http://localhost"
+]
 
-class TelaFuncionario(Screen):
-    def entrar(self):
-        print('Teste entrar')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-class TelaCadastroCliente(Screen):
-    def confirmar(self):
-        nomeCompleto = self.ids.nomeCliente.text
+def connect():
+    return mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='',
+        database='projeto'
+    )
 
-        cpf = self.ids.cpfCliente.text
-        nomeCompleto = nomeCompleto.upper()
+@app.post("/login")
+async def validate_login(
+    email: str = Form(...),
+    senha: str = Form(...)
+):
+    try:
+        comando = f"""SELECT * FROM users WHERE email = '{email}' and senha = md5('{senha}')"""
+        conn = connect()
+        cursor = conn.cursor()
+        data = cursor.execute(comando)
+        cursor.close()
 
-        gmail = self.ids.gmailCliente.text
-        gmail = gmail.lower()
+        return data.fetchone()
+    except mysql.connector.Error as err:
 
-        senha = self.ids.senhaCliente.text
-        
-        database.addCliente(nomeCompleto, cpf, gmail, senha)
-
-class TelaCadastroConfirmado(Screen):
-    pass
-
-class GestaoDeFabrica(App):
-    def build(self):
-        return Builder.load_file("telaGestao.kv")
-
-GestaoDeFabrica().run()
+        return format(err)
