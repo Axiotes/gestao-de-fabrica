@@ -17,7 +17,7 @@ def connect():
         host="localhost",
         port="3306",
         user="root",
-        password="mysql",
+        password="",
         database="projeto"
     )
 
@@ -30,6 +30,9 @@ async def validate_login(
     cursor = conn.cursor()
     comando = f"""SELECT * FROM users WHERE email = '{email}' and senha = md5('{senha}')"""
     data = cursor.execute(comando)
-    #records = cursor.fetchall()
+    records = cursor.fetchall()
 
-    return data
+    if records == []:
+        return False
+    else:
+        return True

@@ -28,13 +28,18 @@ $(
                 dataType: "json",
                 headers: {
                     "accept": "application/json",
-                    //"Access-Control-Allow-Origin":"*"
+                    //"Access-Control-Allow-Origin": "*"
                 }
             })
             .done(function(resp){
-                console.log(resp)
-            });
-        
-        });
-    }
-)
+                if (resp == false){
+                    alert("Email ou senha inválido")
+                }
+                else {
+                    location.replace("dashboard.html")
+                }
+            }); //.done(function(resp)
+            
+        }); //$("#form-login").on("submit", function(event)
+    } //function()
+) //$(
